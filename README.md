@@ -46,7 +46,7 @@ $some_version = Version::load(3);
 ```
 
 
-**Count how many versions a object has**
+**Count how many versions an object has**
 ```
 <?php
 $user = User::find(1);
