@@ -11,8 +11,9 @@ class Version {
 	public static function freeze($src) {
 		$data = json_encode($src->original);
 		$table = strtolower(get_class($src));
-		$obj_id = $src->original['id'];
-		return DB::table(Version::$table)->insert(array('data' => $data, 'object_table' => $table, 'object_id' => $obj_id));
+		$obj_id = isset($src->original['id']) ? $src->original['id'] : false;
+		if($obj_id) return DB::table(Version::$table)->insert(array('data' => $data, 'object_table' => $table, 'object_id' => $obj_id));
+		return false;
 	}
 	
 	/**
