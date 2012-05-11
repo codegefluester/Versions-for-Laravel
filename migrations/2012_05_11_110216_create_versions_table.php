@@ -14,8 +14,11 @@ class Version_Create_Versions_Table {
 			$table->increments('id');
 			$table->integer('object_id')->index();
 			$table->string('object_table', 255);
+			$table->string('name', 255);
 			$table->text('data');
+			$table->string('hash', 255);
 			$table->timestamps();
+			$table->unique(array('object_id', 'object_table', 'hash'));
 		});
 	}
 
