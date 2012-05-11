@@ -22,7 +22,7 @@ class Version {
 	* Get the table name, where we will save the versions
 	* from the Laravel config
 	*
-	* @return void
+	* @return string
 	*/
 	public static function getVersionsTable() {
 		$cfg = Config::get('version');
@@ -78,7 +78,7 @@ class Version {
 	* Loads a specific saved version by its primary key
 	*
 	* @param int $version_id
-	* @return void
+	* @return object
 	*/
 	public static function load($version_id) {
 		$data = DB::table(Version::getVersionsTable())->where_id($version_id)->first();
@@ -92,7 +92,7 @@ class Version {
 	* Get all versions of an object
 	*
 	* @param string $obj
-	* @return void
+	* @return array
 	*/
 	public static function all($obj) {
 		return DB::table(Version::getVersionsTable())->where('object_id', '=', $obj->attributes['id'])->where('object_table', '=', strtolower(get_class($obj)))->order_by('updated_at', 'desc')->get();
@@ -104,7 +104,7 @@ class Version {
 	* How many versions are saved for a given object? 
 	*
 	* @param string $obj
-	* @return void
+	* @return int
 	*/
 	public static function count($obj) {
 		return DB::table(Version::getVersionsTable())->where('object_id', '=', $obj->attributes['id'])->where('object_table', '=', strtolower(get_class($obj)))->count();
@@ -116,7 +116,7 @@ class Version {
 	* Retrieve the most recent version of an object
 	*
 	* @param string $obj
-	* @return void
+	* @return object
 	*/
 	public static function latest($obj) {
 		return DB::table(Version::getVersionsTable())->where('object_id', '=', $obj->attributes['id'])->where('object_table', '=', strtolower(get_class($obj)))->order_by('created_at', 'desc')->first();
@@ -128,7 +128,7 @@ class Version {
 	* Delete a version of an object
 	*
 	* @param int $version_id
-	* @return void
+	* @return bool
 	*/
 	public static function delete($version_id) {
 		return DB::table(Version::getVersionsTable())->delete($version_id);
@@ -139,7 +139,7 @@ class Version {
 	* Delete all versions of an object
 	*
 	* @param string $obj
-	* @return void
+	* @return bool
 	*/
 	
 	public static function deleteAll($obj) {
