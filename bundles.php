@@ -7,7 +7,6 @@ array('version' => array(
 					'autoloads' => array(
 						'map' => array(
 								'Version' => '(:bundle)/Version.php',
-								'Document' => '(:bundle)/Document.php',
 							 ),
 						),
 					)
