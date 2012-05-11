@@ -1,7 +1,7 @@
 <?php
 
 
-class Version {
+class Version extends Eloquent {
 
 	static $table = "versions";
 	static $timestamps = false;
@@ -15,6 +15,7 @@ class Version {
 		$doc->object_table = $table;
 		$doc->object_id = $obj_id;
 		return $doc->save();
+
 	}
 	
 	public static function unfreeze($document_id) {
@@ -25,6 +26,10 @@ class Version {
 	
 	public static function getFrozenObjects($object_id, $object_table) {
 		return Version::where('object_id', '=', $object_id)->where('object_table', '=', $object_table)->get();
+	}
+	
+	public static function getLatestFreeze($object_id, $object_table) {
+		return Version::where('object_id', '=', $object_id)->where('object_table', '=', $object_table)->order_by('created_at', 'desc')->first();
 	}
 
 }
