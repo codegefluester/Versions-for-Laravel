@@ -33,6 +33,7 @@ class Version {
 	/**
 	* Save a version of the current state of an object. 
 	* Will automatically check for duplicates and won't save them. 
+	* You can specify a name for the version if you want to. 
 	*
 	* @param string $src
 	* @param string $name
